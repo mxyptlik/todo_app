@@ -82,4 +82,16 @@ The helper writes unique values to ignored `.env` without displaying the private
 
 ## Deployment boundary
 
+## Render
+
+Deploy one Render **Web Service** from the repository root. It serves the built Daylist client at `/` and the API at `/api`.
+
+```text
+Build Command: npm ci && npm run build
+Start Command: node server/dist/server.js
+Pre-Deploy Command: npm run migrate --workspace=server
+```
+
+Set `DATABASE_URL` from Render PostgreSQL plus the three `VAPID_*` values. Render supplies `PORT`; do not set a fixed production port.
+
 AWS deployment is documented in [docs/aws-deployment.md](docs/aws-deployment.md). No cloud resource is created by this repository or its local commands.

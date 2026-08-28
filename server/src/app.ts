@@ -1,6 +1,7 @@
 import express, { type Request, type Response } from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
+import { existsSync } from 'node:fs';
 import { z } from 'zod';
 import type { NotificationRepository } from './db/notifications.js';
 import type { PushConfig } from './notifications.js';
@@ -40,7 +41,7 @@ const calendarFile = (todo: Todo) => {
   return `${lines.filter(Boolean).join('\r\n')}\r\n`;
 };
 
-export const createApp = (todos: TodoRepository, notifications?: NotificationRepository, pushConfig: PushConfig = null) => {
+export const createApp = (todos: TodoRepository, notifications?: NotificationRepository, pushConfig: PushConfig = null, clientDist?: string) => {
   const app = express();
   app.disable('x-powered-by');
   app.use(helmet());
@@ -107,6 +108,10 @@ export const createApp = (todos: TodoRepository, notifications?: NotificationRep
     if (!notifications) return res.status(204).send();
     try { await notifications.remove(endpoint.data.endpoint); return res.status(204).send(); } catch (cause) { return next(cause); }
   });
+  if (clientDist && existsSync(clientDist)) {
+    app.use(express.static(clientDist));
+    app.get('/{*splat}', (_req, res) => res.sendFile('index.html', { root: clientDist }));
+  }
   app.use((_req, res) => error(res, 404, 'NOT_FOUND', 'Route not found.'));
   app.use((cause: unknown, _req: Request, res: Response, _next: express.NextFunction) => {
     void _next;
