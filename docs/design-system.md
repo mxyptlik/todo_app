@@ -14,9 +14,3 @@ The product is a calm, editorial task workspace: warm paper (`#f9f7f2`) around a
 The composer preserves text on validation/network failure. Filters are real buttons with `aria-pressed`; task completion is a labelled checkbox; deletion has an accessible label and native tooltip. Loading, empty, errors, disabled, focus-visible, pressed, and completed states are all represented. Short transitions are disabled for reduced-motion users. The mobile layout is designed from 320px up with no hover-only action.
 
 Scheduling separates the date from the start time: one-tap Morning, Noon, Afternoon, and Evening choices remove the mobile time-spinner gesture, while an explicitly labelled half-hour selector remains available for a precise choice. The Agenda tab sorts scheduled items and marks active overlaps in text. The notification center distinguishes a server that lacks VAPID setup, an enabled device, a denied permission, and unsupported browsers; it never implies that a reminder was delivered when push is unavailable. Actual delivered reminders persist in the notification center, and a red numeric badge on Alerts denotes unread items until the user chooses **Mark all read**. Scheduled cards expose a labelled calendar-export action.
-
-## MCP record
-
-Figma MCP was used to create and inspect editable desktop, mobile, empty, and error frames plus scoped colour/spacing/radius variables and text/elevation styles: [Todo App – Design System and Screens](https://www.figma.com/design/6KxtuSzTsEx7fF1nbvjpHE).
-
-21st MCP was not connected. To enable it once, install/configure the 21st plugin with an `API_KEY_21ST` in the Codex user configuration as described in `MCP_SETUP.md`; it is never a runtime dependency.
