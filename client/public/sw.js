@@ -1,6 +1,6 @@
 self.addEventListener('push', (event) => {
   const payload = event.data ? event.data.json() : { title: 'Daylist reminder', body: 'A scheduled item is due.', url: '/' };
-  event.waitUntil(self.registration.showNotification(payload.title, { body: payload.body, icon: '/favicon.ico', data: { url: payload.url || '/' }, tag: `daylist-${payload.title}`, renotify: true }));
+  event.waitUntil(self.registration.showNotification(payload.title, { body: payload.body, icon: '/favicon.ico', silent: false, data: { url: payload.url || '/' }, tag: `daylist-${payload.title}`, renotify: true }));
 });
 self.addEventListener('notificationclick', (event) => {
   event.notification.close();
