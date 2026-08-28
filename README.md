@@ -14,6 +14,8 @@ docker compose exec api npm run migrate
 
 Open http://localhost:5173. Stop services with `docker compose down`; add `-v` only when intentionally discarding the local database volume.
 
+`server/db/schema.sql` is a readable full-schema snapshot for review or a clean manual bootstrap. Apply `server/db/migrations/` through `npm run migrate` for normal development, since migrations are the versioned source of truth.
+
 ## Verification commands
 
 The following commands are safe to run from the repository root after `npm install`:
