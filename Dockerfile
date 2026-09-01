@@ -26,5 +26,5 @@ RUN npm ci --omit=dev --workspace=@daylist/server
 COPY --from=build /app/server/dist ./server/dist
 COPY --from=build /app/client/dist ./client/dist
 
-EXPOSE 4000
+EXPOSE 3001
 CMD ["node", "server/dist/server.js"]
